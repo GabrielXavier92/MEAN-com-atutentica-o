@@ -1,0 +1,10 @@
+para subir o mongo depois de configurado conforme o link
+https://www.digitalocean.com/community/tutorials/como-instalar-o-mongodb-no-ubuntu-16-04-pt
+
+sudo systemctl start mongodb.service
+
+inicia o servico definido no package.json dentro do scripts
+o parametro dev faz com que o nodemon seja iniciado
+poderia ter sido usado o production por exemplo
+
+npm run dev

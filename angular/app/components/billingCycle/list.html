@@ -1,0 +1,29 @@
+<div class="box-body">
+      
+   <table class="table">
+      <thead>
+         <tr>
+            <th>Nome</th>
+            <th>Mês</th>
+            <th>Ano</th>
+            <th>Ações</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="billingCycle in bcCtrl.billingCycles">      
+            <!--Quando é colocado o :: , o bind é feito apenas uma vez -->      
+            <td>{{:: billingCycle.name }}</td>
+            <td>{{:: billingCycle.month }}</td>
+            <td>{{:: billingCycle.year }}</td>
+            <td class="table-actions">
+               <button ng-click="bcCtrl.showTabUpdate(billingCycle)" class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+               <button ng-click="bcCtrl.showTabDelete(billingCycle)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <div class="box-footer clearfix">      
+         <paginator url="/#!/billingCycle" pages="{{ bcCtrl.pages }}"></paginator>
+   </div>
+
+</div>

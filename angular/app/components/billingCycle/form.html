@@ -1,0 +1,62 @@
+<div role="form">
+   <div class="box-body">
+   
+      <meu-input
+         model="bcCtrl.billingCycle.name"
+         grid="12 6 4"          
+         label="Nome"
+         id="name"
+         placeholder="Informe o Nome do lancamento"
+         type="text"
+         readonly="bcCtrl.tabDelete">
+      </meu-input>
+      <meu-input
+         model="bcCtrl.billingCycle.month"
+         grid="12 6 4"          
+         label="Mês"
+         id="month"
+         placeholder="Digite o Mes"
+         type="number"
+         readonly="bcCtrl.tabDelete">
+      </meu-input>
+      <meu-input
+         model="bcCtrl.billingCycle.year"
+         grid="12 6 4"          
+         label="Ano"
+         id="year"
+         placeholder="Informe o Ano"
+         type="number"
+         readonly="bcCtrl.tabDelete">
+      </meu-input>
+
+      <div class="col-xs-12">
+         <fieldset>
+            <legend>Resumo</legend>
+            <div ng-include="'components/billingCycle/summary.html'"></div>
+         </fieldset>
+      </div>
+
+      <div class="col-xs-12 col-sm-8">
+         <fieldset>
+            <legend>Créditos</legend>
+            <div ng-include="'components/billingCycle/creditList.html'"></div>
+         </fieldset>
+      </div>
+
+      <div class="col-xs-12 col-sm-11">
+            <fieldset>
+               <legend>Debitos</legend>
+               <div ng-include="'components/billingCycle/debitList.html'"></div>
+            </fieldset>
+      </div>
+
+   </div>
+
+   <div clas="box-footer">
+      <button ng-if="bcCtrl.tabCreate" class="btn btn-primary" ng-click="bcCtrl.create()">Incluir</button>
+      <button ng-click="bcCtrl.update()" ng-if="bcCtrl.tabUpdate" class="btn btn-info">Alterar</button>
+      <button ng-click="bcCtrl.delete()" ng-if="bcCtrl.tabDelete" class="btn btn-danger">Excluir</button>
+      <button ng-click="bcCtrl.refresh()" class="btn btn-default">Cancelar</button>
+   </div>   
+
+</div>

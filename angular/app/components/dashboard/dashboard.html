@@ -1,0 +1,24 @@
+<content-header titulo="Dashboard" small="Versao 1.0"></content-header>
+<section class="content" ng-controller="DashboardCtrl as dash">
+    <value-box 
+        grid="4"
+        background="bg-green"
+        valor="{{ dash.credito | number: 2}}"
+        texto="Total Creditos"
+        icone="fa fa-bank">
+    </value-box>
+    <value-box 
+        grid="4"
+        background="bg-red"
+        valor="{{ dash.debito | number: 2}}"
+        texto="Total Debitos"
+        icone="fa fa-credit-card">
+    </value-box>
+    <value-box 
+        grid="4"
+        background="bg-blue"
+        valor="{{ dash.total | number: 2}}"
+        texto="Valor Consolidado"
+        icone="fa fa-money">
+    </value-box> 
+</section>
