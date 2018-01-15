@@ -1,30 +1,31 @@
 const express = require('express')
+const auth = require('./auth')
 
 //chama uma funcao que passa uma informacao para outro modulo
 module.exports = function(server){
-    //API routes
-    //utiliza o server importado para criar as rotas
 
-    //declara um midlware e a primeira rota /api
-    const router = express.Router()
-    server.use('/api', router)
+    //Rotas Abertas, sem necessidade de token
+    const openApi = express.Router()
+    server.use('/oapi', openApi)
 
-    //rotas da API
+    const AuthService = require('../api/user/authService')
+    openApi.post('/login', AuthService.login)
+    openApi.post('/signup', AuthService.signup)
+    openApi.post('/validateToken', AuthService.validateToken)
 
-    router.get('/teste', function(req, res){
-        res.send('Ola');
-    })
+    //Rotas protegidas por Token jwt
+    const protectedApi = express.Router()
+    server.use('/api', protectedApi)
+    //nesse ponto rodamos o metodo auth criado, caso ele seja valido as outras rotas serao liberadas
+    protectedApi.use(auth)
 
-    const billingCycleService = require('../api/billingCyle/billingCycleService')
+    //mapeando usando a api node-restful
+    const billingCycleService = require('../api/billingCycle/billingCycleService')
+    billingCycleService.register(protectedApi, '/billingCycles')
 
-    //utiliza o metodo registre do node-restfull para registrar uma rota
-    billingCycleService.register(router, '/billingCycles')
+    //mapeando usando a api do express
+    const billingSumaryService = require('../api/billingSummary/billingSummaryService')
+    protectedApi.route('/billingSumary').get(billingSumaryService.getSummary)
+    //billingSumaryService.register(protectedApi, '/billingSumary')
 
-    
-    //como nesse caso nao utilizamos o node-restful temos que criar a rota completa e atribuir
-    //quais verbos HTTP estarao disponivels na rota
-    const billingSummaryService = require('../api/billingSummary/billingSummaryService')
-    //toda vez que houver uma requisicao get em /api/billingSumary o metodo getSummary
-    //sera chamado
-    router.route('/billingSumary').get(billingSummaryService.getSummary)
 }

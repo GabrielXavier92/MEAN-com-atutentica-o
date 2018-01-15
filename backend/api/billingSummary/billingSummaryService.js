@@ -3,7 +3,7 @@
 //mas é uma segunda forma de implementacao
 const _ = require('lodash')
 
-const BillingCycle = require('../billingCyle/billingCycle')
+const BillingCycle = require('../billingCycle/billingCycle')
 
 function getSummary(req, res){
     //operacao de fluxo de agregacao
