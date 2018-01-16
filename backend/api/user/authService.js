@@ -23,6 +23,7 @@ const login = (req, res) => {
          return sendErrorsFromDB(res, err)
       }else if(user && bcrypt.compareSync(password, user.password)){
          const token = jwt.sign(user, env.authSecret, {
+            //tempo que um token fica valido na aplicacao
             expiresIn: "1 day"
          })
          const { name, emai } = user
@@ -69,7 +70,7 @@ const signup = (req, res, next) => {
       if(err){
          return sendErrorsFromDB(res, err)
       } else if(user){
-         return res.status(400).send({erros: ['Email ja cadastrado']})
+         return res.status(400).send({errors: ["Email ja cadastrado"]})
       } else{
          const newUser = new User({ name, email, password: passwordHash})
          newUser.save(err=>{
@@ -78,7 +79,7 @@ const signup = (req, res, next) => {
             }else {
                login(req, res, next)
             }
-         })
+         }) 
       }
    })
 }
